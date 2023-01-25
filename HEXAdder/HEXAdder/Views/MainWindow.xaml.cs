@@ -33,6 +33,12 @@ namespace HEXAdder.Views
 
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(AppTitlebar);
+
+            IntPtr hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+            Microsoft.UI.WindowId windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hwnd);
+            Microsoft.UI.Windowing.AppWindow appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
+
+            appWindow.Resize(new Windows.Graphics.SizeInt32(1280, 720));
         }
 
         public MainWindowViewModel ViewModel { get; private set; } = new();

@@ -1,4 +1,4 @@
-<!--  Copyright (c) Microsoft Corporation and Contributors.  -->
+﻿<!--  Copyright (c) Microsoft Corporation and Contributors.  -->
 <!--  Licensed under the MIT License.  -->
 
 <Window
@@ -16,10 +16,7 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <Grid
-            Name="AppTitlebar"
-            Grid.Row="0"
-            Background="White">
+        <Grid Name="AppTitlebar" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30" />
                 <ColumnDefinition Width="100" />
@@ -33,13 +30,38 @@
             <TextBlock
                 Grid.Column="1"
                 VerticalAlignment="Center"
-                Foreground="#1d1d1d"
-                Style="{StaticResource CaptionTextBlockStyle}"
                 Text="{x:Bind ViewModel.WindowTitle}"
                 TextWrapping="NoWrap" />
         </Grid>
-        <Grid Grid.Row="1" Background="White">
-            <Button Content="Push me!!" />
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*" />
+                <RowDefinition Height="5*" />
+            </Grid.RowDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <TextBox
+                    VerticalAlignment="Stretch"
+                    AcceptsReturn="True"
+                    PlaceholderText="16進数を2桁づつスペースで区切って入力してください（30 30 31 30)"
+                    Text="{x:Bind ViewModel.HexString, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    TextWrapping="Wrap" />
+            </ScrollViewer>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Button
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
+                    Command="{x:Bind ViewModel.SumHEXCommand}"
+                    Content="↓ 計算する ↓" />
+                <TextBox
+                    Grid.Row="1"
+                    IsReadOnly="True"
+                    PlaceholderText="計算するボタンを押してください。"
+                    Text="{x:Bind ViewModel.Total, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </Grid>
         </Grid>
     </Grid>
 </Window>
